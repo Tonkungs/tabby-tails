@@ -2,7 +2,7 @@ import React from 'react'
 
 function Navbar() {
   return (
-    <div className="navbar bg-base-100 drop-shadow-md">
+    <div className="navbar bg-base-100 z-[2] shadow fixed">
       <div className="flex-1">
         <a className="btn btn-ghost normal-case text-xl">Kojji Tabby Tails</a>
       </div>

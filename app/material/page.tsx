@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from '../components/actions/button'
 import Pagination from '../components/navigation/pagination'
+import Link from 'next/link'
 
 export default function Page() {
 
@@ -50,7 +51,7 @@ export default function Page() {
     return (
         <div className="flex flex-col ">
             <div className='flex justify-end'>
-                <Button className='btn-primary '> เพิ่ม</Button>
+                <Button className='btn-primary '> <Link href="/material/create">เพิ่ม</Link> </Button>
             </div>
             <div>
                 <div className="overflow-x-auto">

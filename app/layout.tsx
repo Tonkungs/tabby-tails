@@ -1,4 +1,5 @@
 'use client'
+import Menu from './components/navigation/menu'
 import Navbar from './components/navigation/navbar'
 import './globals.css'
 // import type { Metadata } from 'next'
@@ -19,9 +20,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* className={inter.className} */}
-      <body >
+      <body className='h-screen flex flex-col'>
         <Navbar />
-        {children}
+      <div className='flex'>
+        <div className='menu- mt-16 mr-4 w-1/5'>
+          <Menu />
+        </div>
+        <div className='blog- mt-16 w-4/5'>
+          {children}
+        </div>
+      </div>
+     
+        
       </body>
     </html>
   )

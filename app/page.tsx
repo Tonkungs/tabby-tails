@@ -13,12 +13,14 @@ import Indicator from './components/layout/indicator';
 import Toast from './components/layout/toast';
 import Breadcrumbs from './components/navigation/breadcrumbs';
 import Link from './components/navigation/link';
+import Menu from './components/navigation/menu';
 import Pagination from './components/navigation/pagination';
 // import H1 from '../components/h1';
 
 export default function Home() {
   return (
-    <main >
+    <main className='flex'>
+   
       <div >
         ทดสอบ
         {/* <H1 size="5xl" color="success"/> */}
@@ -33,7 +35,7 @@ export default function Home() {
         <Link />
         <Indicator />
         <Toast />
-        <Button/>
+        <Button />
         <Dropdown />
         <Modal />
         <Swap />
