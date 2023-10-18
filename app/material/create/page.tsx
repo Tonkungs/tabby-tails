@@ -11,9 +11,7 @@ const lists = [
     {
         order: 0,
         date_buy: "2022-10-13",
-        width: 1,
-        length: 10,
-        // unit: "ton",
+        quantity: 10,
         price_per_unit: "1",
         total_price: "100",
         place_buy: "MISO",
@@ -24,9 +22,7 @@ const lists = [
     {
         order: 1,
         date_buy: "2022-10-13",
-        width: 1,
-        length: 10,
-        // unit: "ton",
+        quantity: 10,
         price_per_unit: "1",
         total_price: "100",
         place_buy: "MISO",
@@ -35,39 +31,39 @@ const lists = [
         note: ""
     },
 ]
-const listdUnits = [
+const listdSizes = [
     {
-        name: 'มิลลิเมตร',
-        value: 'MILLIMETER',
+        name: 'S',
+        value: 'SMAL',
     },
     {
-        name: 'เซนติเมตร',
-        value: 'CENTIMETER',
+        name: 'M',
+        value: 'MIDDEL',
     },
     {
-        name: 'เมตร',
-        value: 'METRE',
+        name: 'L',
+        value: 'LARGTH',
     },
     {
-        name: 'หลา',
-        value: 'YARD',
+        name: '22 mm',
+        value: '22 mm',
     }
 ]
 
 const listdSelect = [
     {
-        name: 'ผ้า',
+        name: 'กระดุม',
         value: 'FABRIC',
     },
     {
-        name: 'ริบบิ้น',
+        name: 'กุ๊น',
         value: 'RIBBIN',
     }
 ]
 
 interface IState {
     name: string,
-    unit: string,
+    size: string,
     type: string,
     note: string,
     list: IListFabric[]
@@ -76,9 +72,7 @@ interface IState {
 interface IListFabric {
     order: number
     date_buy: string
-    width: number
-    length: number
-    // unit: string
+    quantity: number
     price_per_unit: string
     total_price: string
     place_buy: string
@@ -90,7 +84,7 @@ interface IListFabric {
 export default function Page() {
     const [fabric, setFabric] = useState<IState>({
         name: "ผ้า",
-        unit: "MILLIMETER",
+        size: "MILLIMETER",
         type: "FABRIC",
         note: "what",
         list: lists
@@ -109,8 +103,7 @@ export default function Page() {
             list: [...fabric.list, {
                 order: fabric.list.length + 1,
                 date_buy: "",
-                width: 0,
-                length: 0,
+                quantity: 0,
                 // unit: "ton",
                 price_per_unit: "",
                 total_price: "",
@@ -163,15 +156,15 @@ export default function Page() {
 
             </div>
             <div className='flex flex-col'>
-                <h1 className="text-3xl text-center text-orange-700 font-bold m-4">ผ้า/ริปบิน</h1>
+                <h1 className="text-3xl text-center text-orange-700 font-bold m-4">วัสดุอุปกรณ์</h1>
                 <div className="flex justify-around ">
                     <div className="from grid grid-cols-2 gap-4 basis-1/2">
-                        <p className="text-base text-center">ชื่อผ้า</p>
+                        <p className="text-base text-center">ชื่อวัสดุอุปกรณ์</p>
                         <Input name="name" className="input-sm" value={fabric.name}
                             onChange={(props: string) => onSetData('name', props)} />
-                        <p className="text-base text-center">หน่วย</p>
-                        <Select name="unit" className="select-sm" lists={listdUnits} value={fabric.unit}
-                            onChange={(props: string) => onSetData('unit', props)} />
+                        <p className="text-base text-center">ขนาด</p>
+                        <Select name="size" className="select-sm" lists={listdSizes} value={fabric.size}
+                            onChange={(props: string) => onSetData('size', props)} />
                         <p className="text-base text-center">ประเภท</p>
                         <Select name="type" className="select-sm" lists={listdSelect} value={fabric.type}
                             onChange={(props: string) => onSetData('type', props)} />
@@ -197,31 +190,16 @@ export default function Page() {
                 <table className="table table-pin-rows">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th colSpan={2}>ขนาดภาพ</th>
-                            {/* <th></th> */}
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <th rowSpan={2}>ลำดับ</th>
-                            <th rowSpan={2}>วันที่ซื้อ</th>
-                            <th>กว้าง</th>
-                            <th>ยาว</th>
-                            {/* <th rowSpan={2}>หน่วย</th> */}
-                            <th rowSpan={2}>ราคาต่อหน่วย</th>
-                            <th rowSpan={2}>ราคารวม</th>
-                            <th rowSpan={2}>สถานที่ซื้อ</th>
-                            <th rowSpan={2}>คนซื้อ</th>
-                            <th rowSpan={2}>จ่ายแล้ว</th>
-                            <th rowSpan={2}>note</th>
-                            <th rowSpan={2}></th>
+                            <th >ลำดับ</th>
+                            <th >วันที่ซื้อ</th>
+                            <th>จำนวน</th>
+                            <th >ราคาต่อหน่วย</th>
+                            <th >ราคารวม</th>
+                            <th >สถานที่ซื้อ</th>
+                            <th >คนซื้อ</th>
+                            <th >จ่ายแล้ว</th>
+                            <th >note</th>
+                            <th ></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -229,16 +207,11 @@ export default function Page() {
                             <th>{list.order}</th>
                             <td><Date name="date_buy" value={list.date_buy} className='input-sm w-32'
                                 onChange={(prop: string) => setDatainArray(index, 'date_buy', prop)} /></td>
-                            <td>
-                                <Input name="width" valueType="number" className="input-sm w-16" value={list.width}
-                                    onChange={(props: string) => setDatainArray(index, 'width', props)} />
-                            </td>
-                            <td> <Input name="length" valueType="number" className="input-sm w-16" value={list.length}
-                                onChange={(props: string) => setDatainArray(index, 'length', props)} /></td>
-                            {/* <td>{list.unit}</td> */}
+                            <td> <Input name="quantity" valueType="number" className="input-sm w-16" value={list.quantity}
+                                onChange={(props: string) => setDatainArray(index, 'quantity', props)} /></td>
                             <td><Input name="price_per_unit" valueType="number" className="input-sm w-16" value={list.price_per_unit}
                                 onChange={(props: string) => setDatainArray(index, 'price_per_unit', props)} /></td>
-                            <td>{Number(list.length) * Number(list.price_per_unit)}</td>
+                            <td>{Number(list.quantity) * Number(list.price_per_unit)}</td>
                             <td><Input name="place_buy" className="input-sm w-16" value={list.place_buy}
                                 onChange={(props: string) => setDatainArray(index, 'place_buy', props)} /></td>
                             <td><Input name="own_buy" className="input-sm w-16" value={list.own_buy}

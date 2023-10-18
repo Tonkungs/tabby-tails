@@ -5,10 +5,18 @@ interface IProps {
   value?: string | number,
   name?: string,
   onChange?: any
+  valueType?: 'string' | 'number'
 }
 export default function Input(props: IProps) {
   const handleInputChange = (event: { target: { value: any; }; } ) => {
-    props.onChange(event.target.value);
+   
+    if (props?.valueType === 'number') {
+      props.onChange(Number(event.target.value));
+
+    }else {
+      props.onChange(event.target.value);
+
+    }
   };
   return (
     <input name={props.name}
