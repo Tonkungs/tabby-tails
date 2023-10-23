@@ -23,10 +23,10 @@ export default function RootLayout({
       <body className='h-screen flex flex-col'>
         <Navbar />
       <div className='flex'>
-        <div className='menu- mt-16 mr-4 w-1/5'>
+        <div className='menu- mt-16 w-1/5'>
           <Menu />
         </div>
-        <div className='blog- mt-16 w-4/5'>
+        <div className='blog- mt-20 w-4/5 m-4'>
           {children}
         </div>
       </div>

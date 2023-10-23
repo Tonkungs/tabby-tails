@@ -1,10 +1,12 @@
+'use client'
 import React from 'react'
 import Button from '../components/actions/button'
 import Pagination from '../components/navigation/pagination'
-import Link from 'next/link'
+// import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
-
+    const router = useRouter()
     const lists = [
         {
             order: "1",
@@ -51,7 +53,15 @@ export default function Page() {
     return (
         <div className="flex flex-col ">
             <div className='flex justify-end'>
-                <Button className='btn-primary '> <Link href="/material/create">เพิ่ม</Link> </Button>
+            {/* href={{
+              pathname: '/material/[slug]',
+              query: { slug: 'create' },
+            }} */}
+            {/* href="/material/create" */}
+                {/* <Button className='btn-primary '> <Link href="/material/create" shallow>เพิ่ม</Link> </Button> */}
+                
+                <Button className='btn-primary ' onClick={() => router.push('/material/create')} > เพิ่ม </Button>
+
             </div>
             <div>
                 <div className="overflow-x-auto">
